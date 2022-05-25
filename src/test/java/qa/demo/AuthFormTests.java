@@ -1,6 +1,5 @@
 package qa.demo;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -28,6 +27,7 @@ public class AuthFormTests {
         String mobile = "79123654125";
         String subjects = "English";
         String currentAddress = "Saratov";
+        String imgPath = "cat.PNG";
 
         open("/automation-practice-form");
         $("#app").shouldHave(text("Practice Form"));
@@ -42,7 +42,8 @@ public class AuthFormTests {
         $(".react-datepicker__day--021").click();
         $("#subjectsInput").setValue(subjects).pressEnter();
         $$(".custom-checkbox").get(1).click();
-        $("input#uploadPicture").uploadFile(new File("src\\test\\resources\\cat.png"));
+        $("#uploadPicture"). uploadFromClasspath(imgPath);
+        //$("input#uploadPicture").uploadFile(new File("src\test\resources\cat.PNG"));
         $("#currentAddress").setValue(currentAddress);
         $("#react-select-3-input").setValue("NCR").pressEnter();
         $("#react-select-4-input").setValue("Noida").pressEnter();
