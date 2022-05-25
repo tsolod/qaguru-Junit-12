@@ -42,7 +42,7 @@ public class AuthFormTests {
         $(".react-datepicker__day--021").click();
         $("#subjectsInput").setValue(subjects).pressEnter();
         $$(".custom-checkbox").get(1).click();
-        $("#uploadPicture"). uploadFromClasspath(imgPath);
+        $("#uploadPicture").uploadFromClasspath(imgPath);
         //$("input#uploadPicture").uploadFile(new File("src\test\resources\cat.PNG"));
         $("#currentAddress").setValue(currentAddress);
         $("#react-select-3-input").setValue("NCR").pressEnter();
