@@ -13,14 +13,14 @@ import static com.codeborne.selenide.Selenide.*;
 public class AuthFormTests {
 
     @BeforeAll
-    static void SetUp() {
+    static void setUp() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
         Configuration.holdBrowserOpen = true;
     }
 
     @Test
-    public void FillForm() {
+    public void fillForm() {
 
         String name = "Anna";
         String secondName = "Banana";
@@ -42,7 +42,7 @@ public class AuthFormTests {
         $(".react-datepicker__day--021").click();
         $("#subjectsInput").setValue(subjects).pressEnter();
         $$(".custom-checkbox").get(1).click();
-        $("input#uploadPicture").uploadFile(new File("src\\test\\java\\resources\\cat.png"));
+        $("input#uploadPicture").uploadFile(new File("src\\test\\resources\\cat.png"));
         $("#currentAddress").setValue(currentAddress);
         $("#react-select-3-input").setValue("NCR").pressEnter();
         $("#react-select-4-input").setValue("Noida").pressEnter();
