@@ -21,7 +21,7 @@ public class AuthFormTests {
     @Test
     public void fillForm() {
 
-        String name = "AnnaAф";
+        String name = "AnnaAsф";
         String secondName = "Banana";
         String email = "Anna@Banana.ru";
         String mobile = "79123654125";
