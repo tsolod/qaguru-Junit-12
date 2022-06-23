@@ -1,11 +1,15 @@
 package qa.demo;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.openqa.selenium.By;
 
 import java.io.File;
 
@@ -18,7 +22,16 @@ public class AuthFormTests {
     static void setUp() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
-        Configuration.holdBrowserOpen = true;
+    }
+    @ValueSource(strings = {
+            "Git",
+            "Java" })
+    @ParameterizedTest (name = "Поиск книги {0}")
+    void searchBook(String bookName) {
+        open("/books");
+        $("#searchBox").setValue(bookName).pressEnter();
+        $(".rt-tbody").shouldHave(text(bookName));
+
     }
 
     @CsvSource(value = {
@@ -70,6 +83,10 @@ public class AuthFormTests {
                 text(subjects),text("Reading"),text("cat.PNG"),text(currentAddress),text("NCR Noida"));
     }
 
+    @AfterEach
+    void close() {
+        Selenide.closeWebDriver();
+    }
 
 
     }
