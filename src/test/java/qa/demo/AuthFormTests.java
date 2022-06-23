@@ -2,7 +2,10 @@ package qa.demo;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.File;
 
@@ -18,6 +21,21 @@ public class AuthFormTests {
         Configuration.holdBrowserOpen = true;
     }
 
+    @CsvSource(value = {
+            "Anna, Anna@gg.com, Samara, Saratov",
+            "Борис, boris@ff.ru, NY, Moscow"})
+    @ParameterizedTest (name = "Заполнение формы регистрации {0}")
+    void fillFormLog(String userName, String email, String adress, String secondAdress ) {
+        open("/text-box");
+        $("#userName").setValue(userName);
+        $("#userEmail").setValue(email);
+        $("#currentAddress").setValue(adress);
+        $("#permanentAddress").setValue(secondAdress);
+        $("#submit").click();
+        $("#output").shouldHave(text(userName), text(email), text(adress), text(secondAdress));
+    }
+
+    @Disabled
     @Test
     public void fillForm() {
 
@@ -50,12 +68,11 @@ public class AuthFormTests {
         $(".btn-primary").click();
         $(".modal-body").shouldHave(text("Anna Banana"),text(email),text("Male"),text("21 November,1995"),
                 text(subjects),text("Reading"),text("cat.PNG"),text(currentAddress),text("NCR Noida"));
-
-
+    }
 
 
 
     }
 
 
-}
+
