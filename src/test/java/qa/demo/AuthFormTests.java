@@ -26,7 +26,7 @@ public class AuthFormTests {
     @ValueSource(strings = {
             "Git",
             "Java" })
-    @ParameterizedTest (name = "Поиск книг {0}")
+    @ParameterizedTest (name = "Поиск книги {0}")
     void searchBook(String bookName) {
         open("/books");
         $("#searchBox").setValue(bookName).pressEnter();
